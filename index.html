@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1226">
+  <meta name="description" content="Uma página para celebrar o Natal: contagem regressiva, mensagens e cartão personalizado.">
+  <title>Feliz Natal 🎄</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styler.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <canvas id="neve" aria-hidden="true"></canvas>
+
+  <svg class="treno" viewBox="0 0 220 80" aria-hidden="true">
+    <!-- Saco de presentes (atrás do Papai Noel) -->
+    <g transform="translate(-160 0)">
+      <path d="M166 42 q-3 -16 9 -16 q12 0 9 16 z" fill="#8b5a2b"/>
+      <path d="M172 27 h6" stroke="#f2c46d" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <!-- Patins, Papai Noel e corpo do trenó -->
+    <g transform="translate(-100 0)">
+      <path d="M100 70 Q150 78 202 64" stroke="#f2c46d" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M116 62 v8 M172 62 v8" stroke="#f2c46d" stroke-width="3" stroke-linecap="round"/>
+      <rect x="127" y="26" width="30" height="20" rx="8" fill="#c8102e"/>
+      <circle cx="142" cy="19" r="9" fill="#ffd9b3"/>
+      <path d="M132 17 q10 -20 20 0 z" fill="#c8102e"/>
+      <rect x="131" y="14" width="22" height="4" rx="2" fill="#fff"/>
+      <circle cx="153" cy="5" r="3.5" fill="#fff"/>
+      <circle cx="138.5" cy="19" r="1.2" fill="#111"/><circle cx="145.5" cy="19" r="1.2" fill="#111"/>
+      <path d="M134 21 q8 16 16 0 q-8 4 -16 0z" fill="#fff"/>
+      <path d="M102 40 h78 q10 0 8 10 l-4 12 h-80 z" fill="#c8102e"/>
+      <path d="M102 47 h84" stroke="#f2c46d" stroke-width="2"/>
+    </g>
+    <!-- Rédeas -->
+    <path d="M54 36 Q112 38 168 47" stroke="#f2c46d" stroke-width="1.5" fill="none"/>
+    <!-- Rena puxando, à frente -->
+    <g transform="translate(110 0)">
+      <g class="rena">
+        <path d="M52 42 L58 30 L68 38 L58 50 Z" fill="#8b5a2b"/>
+        <ellipse cx="40" cy="46" rx="20" ry="10" fill="#8b5a2b"/>
+        <rect x="28" y="52" width="4" height="14" rx="2" fill="#6b4220"/>
+        <rect x="46" y="52" width="4" height="14" rx="2" fill="#6b4220"/>
+        <circle cx="64" cy="32" r="8" fill="#8b5a2b"/>
+        <circle cx="71" cy="34" r="3.5" fill="#e11d2e"/>
+        <circle cx="66" cy="29" r="1.5" fill="#111"/>
+        <path d="M62 25 l-4 -11 m4 11 l6 -9 m-10 2 l-6 0" stroke="#6b4220" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+  </svg>
+
+  <header class="topo">
+    <a href="#" class="logo">Natal</a>
+    <div class="acoes">
+      <button id="btnMusica" class="btn btn-sec" aria-pressed="false">▶ Música</button>
+      <button id="btnTema" class="btn btn-sec">☀️ Tema claro</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-texto">
+        <p id="textoContagem" class="legenda">Faltam para o Natal</p>
+
+        <div class="relogio" role="timer" aria-label="Contagem regressiva para o Natal">
+          <div><b id="d">00</b><small>dias</small></div>
+          <div><b id="h">00</b><small>horas</small></div>
+          <div><b id="m">00</b><small>minutos</small></div>
+          <div><b id="s">00</b><small>segundos</small></div>
+        </div>
+
+        <h1 class="titulo">Feliz<br>Natal</h1>
+
+        <blockquote class="mensagem">
+          <p id="textoMsg" aria-live="polite"></p>
+        </blockquote>
+
+        <div class="hero-botoes">
+          <button id="btnMsg" class="btn">Outra mensagem</button>
+          <a href="#cartao" class="btn btn-sec">Criar meu cartão</a>
+          <a href="#amigo" class="btn btn-sec">Amigo secreto</a>
+        </div>
+      </div>
+
+      <svg class="arvore" viewBox="0 0 300 380" role="img" aria-label="Árvore de Natal com luzes piscando">
+        <defs>
+          <linearGradient id="verde" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1c7a50"/>
+            <stop offset="1" stop-color="#0c3d2b"/>
+          </linearGradient>
+        </defs>
+        <rect x="132" y="322" width="36" height="46" rx="4" fill="#5a3a22"/>
+        <path d="M150 150 L255 250 H45 Z" fill="url(#verde)"/>
+        <path d="M150 90 L240 180 H60 Z" fill="url(#verde)" opacity=".92"/>
+        <path d="M150 190 L275 332 H25 Z" fill="url(#verde)"/>
+        <path d="M150 28 l9 22 24 2 -18 16 6 23 -21 -13 -21 13 6 -23 -18 -16 24 -2z" class="estrela"/>
+        <g id="luzes"></g>
+      </svg>
+    </section>
+
+    <section class="desejos" id="desejos">
+      <h2>Desejos para você</h2>
+      <ul>
+        <li><h3>🕊️ Paz</h3><p>Que o seu lar seja calmo, com silêncio bom e noites tranquilas.</p></li>
+        <li><h3>❤️ Amor</h3><p>Que o carinho transborde em abraços, risadas e mesas cheias de gente querida.</p></li>
+        <li><h3>🌟 Esperança</h3><p>Que o novo ano chegue com sonhos novos e coragem para realizá-los.</p></li>
+        <li><h3>🤝 União</h3><p>Que ninguém fique sozinho e que cada gesto de bondade se multiplique.</p></li>
+        <li><h3>🎁 Generosidade</h3><p>Que os melhores presentes sejam atenção, tempo e cuidado.</p></li>
+        <li><h3>✨ Alegria</h3><p>Que nunca faltem motivos para sorrir e agradecer pela vida.</p></li>
+      </ul>
+    </section>
+
+    <div class="ferramentas">
+      <section class="ferramenta" id="amigo">
+        <h2>Amigo secreto</h2>
+        <p>Adicione pelo menos 3 participantes e sorteie. Cada pessoa toca no próprio nome para ver quem tirou.</p>
+        <form id="formAmigo" class="form">
+          <input id="nomeAmigo" type="text" maxlength="30" placeholder="Nome do participante" aria-label="Nome do participante">
+          <button type="submit" class="btn btn-sec">Adicionar</button>
+        </form>
+        <ul id="listaAmigos" class="chips"></ul>
+        <button id="btnSortear" class="btn" disabled>Sortear 🎁</button>
+        <div id="resultadoAmigo" aria-live="polite"></div>
+      </section>
+
+      <section class="ferramenta" id="carta">
+        <h2>Carta ao Papai Noel</h2>
+        <p>Conte o que você deseja neste Natal. A carta fica só na sua tela e não é enviada a ninguém.</p>
+        <textarea id="textoCarta" rows="5" maxlength="400" placeholder="Querido Papai Noel..." aria-label="Texto da carta"></textarea>
+        <button id="btnCarta" class="btn">Enviar carta ✉️</button>
+        <p id="respostaCarta" class="resposta" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <section class="cartao" id="cartao">
+      <h2>Crie seu cartão de Natal</h2>
+      <p>Escreva um nome e receba uma mensagem para enviar a essa pessoa.</p>
+
+      <form id="formCartao" class="form">
+        <input id="nome" type="text" maxlength="30" placeholder="Nome de quem vai receber" aria-label="Nome para o cartão" required>
+        <button type="submit" class="btn">Gerar cartão</button>
+      </form>
+
+      <div id="saida" aria-live="polite"></div>
+      <button id="btnCompartilhar" class="btn btn-sec" hidden>📤 Compartilhar cartão</button>
+    </section>
+  </main>
+
+  <footer>Feito com ❄️ e carinho. Boas festas! 🎄</footer>
+
+  <audio id="musica" src="./som_natal/donaldduck_ylvhb9y6.mp3" loop preload="none"></audio>
+</body>
+</html>
